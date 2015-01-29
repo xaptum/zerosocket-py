@@ -21,7 +21,7 @@ class zerosocket(object):
     '''
 
 
-    def __init__(self, config = None):
+    def __init__(self, config = None, transport = 'SSL'):
         '''
         Constructor
         '''
@@ -33,6 +33,9 @@ class zerosocket(object):
             self.__conf = FileConfig()
         else:
             self.__conf = config
+
+        # Create Socket. By default 'SSL'
+        self.socket( transport )
 
     def __del__(self):
         '''
@@ -54,23 +57,6 @@ class zerosocket(object):
         else:
             self.__sock = socket.socket(family,type_,proto)
         return self
-    
-    def bind(self,address):
-        '''
-        @param address: a 2-tuple (ip-address,port-number) on which to bind the port and ipaddress
-        '''
-        self.__sock.bind(address)
-    
-    def accept(self):
-        '''
-        @summary: wrapper for 
-        '''
-        self.__sock.accept()
-    
-    def listen(self,backlog):
-        '''
-        '''
-        self.__sock.listen(backlog)
         
     def connect(self,address = None):
         '''
@@ -81,13 +67,6 @@ class zerosocket(object):
             return self.__sock.connect(self.__conf.getaddress());
         else:
             return self.__sock.connect();
-    
-    def setSocket(self, sock):
-        '''
-        @summary: provides an interface to set the socket SSL/TLS or regular run of the mill socket
-        @return: no return
-        '''
-        self.__sock = sock
     
     ''' 
     # no supported in this release   

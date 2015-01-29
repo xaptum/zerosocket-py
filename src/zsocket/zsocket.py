@@ -21,50 +21,6 @@ class zsocket(object):
     __sock : zerosocket
     __conf : [fileconfig] type config
     '''
-
-    def __init__(self, conf = None, sock = None):
-        '''
-        Constructor
-        '''
-        if conf is None:
-            self.__conf = FileConfig()
-        else:
-            self.__conf = conf
-        
-        if sock is None:
-            self.__zsock = zerosocket.zerosocket(self.__conf)
-            self.__zsock.socket('TLS')
-        else:
-            self.__zsock = zerosocket.zerosocket(self.__conf)
-#            self.__zsock.setSocket(sock)
-            self.__zsock.socket(sock)
-
-
-    def __del__(self):
-        '''
-        Destructor
-        '''
-    
-    def bind(self,address):
-        '''
-        '''
-        self.__zsock.bind(address)
-    
-    def accept(self):
-        '''
-        '''
-        self.__zsock.accept()
-    
-    def listen(self,backlog):
-        '''
-        '''
-        self.__zsock.listen(backlog)
-        
-    def connect(self,address = None):
-        '''
-        @param address: requires a 2-Tuple (ip-address,port-number), optionally the address is picked up from conf
-        '''
-        return self.__zsock.connect(address)
     
     def recv(self,bufsize,flags = 0):
         '''
