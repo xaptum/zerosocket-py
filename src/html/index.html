@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Xaptum Configuration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style type="text/css">
+    </style>
+  </head>
+  <body>
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+	<td>
+	  <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse;">
+	    <tr>
+	      <td bgcolor="#182933" align="center" style="padding: 20px 0 20px 0;">
+		<img src="logo.png" alt="Xaptum Configuration" style="display: block;" />
+	      </td>
+	    </tr> <!-- container logo row  -->
+	    <tr>
+	      <td bgcolor="#ffffff"  style="padding: 40px 30px 40px 30px;">
+		<form action="update" method="post" id="xaptum-config-form">
+		  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+		    <tr>
+		      <td style="padding: 10px 0 10px 0;">
+			Xaptum Broker Configuration			
+			<table border="0" cellpadding="0" cellspacing="0" width="75%" style="padding: 10px 0 0 0;">
+			  <tr>
+			    <td width="160" valign="top" align="right" style="padding: 2px 0 2px 0;">
+			      Host
+			    </td>
+			    <td style="font-size: 0; line-height: 0;" width="10">
+			      &nbsp;
+			    </td>
+			    <td width="260" valign="top">
+			      <input type="text" name="xaptum-broker-host" placeholder="Xaptum Broker Host" value="broker.xaptum.com"/>
+			    </td>
+			  </tr>
+
+			  <tr>
+			    <td width="160" valign="top" align="right" style="padding: 2px 0 2px 0;">
+			      Port
+			    </td>
+			    <td style="font-size: 0; line-height: 0;" width="10">
+			      &nbsp;
+			    </td>
+			    <td width="260" valign="top">
+			      <input type="text" name="xaptum-broker-port" placeholder="Xaptum Broker Port" value="3300"/>
+			    </td>
+			  </tr>
+			</table> <!-- Broker fields table -->
+		      </td>
+		    </tr> <!-- xaptum broker config -->
+		    <tr>
+		      <td style="padding: 10px 0 10px 0;">
+			Xaptum Network Configuration
+			<table border="0" cellpadding="0" cellspacing="0" width="75%" style="padding: 10px 0 0 0;">
+			  <tr>
+			    <td width="160" valign="top" align="right" style="padding: 2px 0 2px 0;">
+			      Connection Guid
+			    </td>
+			    <td style="font-size: 0; line-height: 0;" width="10">
+			      &nbsp;
+			    </td>
+			    <td width="260" valign="top">
+			      <input type="text" name="xaptum-connection-guid" placeholder="Connection GUID" value=""/>
+			    </td>
+			  </tr>
+
+			  <tr>
+			    <td width="160" valign="top" align="right" style="padding: 2px 0 2px 0;">
+			      Network Username
+			    </td>
+			    <td style="font-size: 0; line-height: 0;" width="10">
+			      &nbsp;
+			    </td>
+			    <td width="260" valign="top">
+			      <input type="text" name="xaptum-network-username" placeholder="Network User Name" value=""/>
+			    </td>
+			  </tr>
+
+<tr>
+			    <td width="160" valign="top" align="right" style="padding: 2px 0 2px 0;">
+			      Network Password
+			    </td>
+			    <td style="font-size: 0; line-height: 0;" width="10">
+			      &nbsp;
+			    </td>
+			    <td width="260" valign="top">
+			      <input type="password" name="xaptum-network-password" placeholder="Network Password" value=""/>
+			    </td>
+			  </tr>
+			</table> <!-- Broker fields table -->
+		      </td>
+		    </tr> <!-- xaptum network config -->
+		    <tr>
+		      <td style="padding: 10px 0 10px 0;">
+			Wireless Router Settings
+			<table border="0" cellpadding="0" cellspacing="0" width="75%" style="padding: 10px 0 0 0;">
+			  <tr>
+			    <td width="160" valign="top" align="right" style="padding: 2px 0 2px 0;">
+			      SSID
+			    </td>
+			    <td style="font-size: 0; line-height: 0;" width="10">
+			      &nbsp;
+			    </td>
+			    <td width="260" valign="top">
+			      <input type="text" name="wireless-ssid" placeholder="Wireless SSID" value=""/>
+			    </td>
+			  </tr>
+
+			  <tr>
+			    <td width="160" valign="top" align="right" style="padding: 2px 0 2px 0;">
+			      Key/Password
+			    </td>
+			    <td style="font-size: 0; line-height: 0;" width="10">
+			      &nbsp;
+			    </td>
+			    <td width="260" valign="top">
+			      <input type="password" name="wireless-key" placeholder="Key/Password" value=""/>
+			    </td>
+			  </tr>
+			</table> <!-- Broker fields table -->
+		      </td>
+		    </tr> <!-- Wireless router settings -->
+		    <tr>
+		      <td align="center" style="padding: 20px 0 0 0;">
+			<button type="submit" form="xaptum-config-form" value="Submit">Submit</button>
+		      </td>
+		    </tr>
+		  </table> <!-- Content Table in a container row -->
+		</form> <!-- Content form -->
+	      </td>
+	    </tr> <!-- container row -->
+	    <tr>
+	      <td bgcolor="#ebebeb"  style="padding: 20px 10px 20px 10px;">
+		<em>Copyright &copy; 2014-2015 Xaptum, Inc., All rights reserved.</em><br/>
+		<br/>
+		<strong>Our mailing address is:</strong><br/>
+		Xaptum, Inc.<br/>
+		222 W. Merchandise Mart, 12th Floor<br/>
+		Chicago, Illinois- 60654<br/>
+		&nbsp;
+	      </td>
+	    </tr> <!-- container footer row -->
+	  </table> <!-- 600px container table -->
+	</td>
+      </tr>
+    </table> <!-- main table -->
+  </body>
+</html>

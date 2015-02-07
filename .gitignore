@@ -2,6 +2,10 @@
 __pycache__/
 *.py[cod]
 
+# 
+src/zsocket/index.html
+src/zsocket/logo.png
+
 # C extensions
 *.so
 
