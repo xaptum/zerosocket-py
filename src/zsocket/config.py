@@ -7,6 +7,7 @@ Created on Aug 29, 2014
 '''
 import json
 import socket
+import os
 from zexceptions import (ZSError,ZSException)
 
 '''
@@ -90,7 +91,7 @@ class Config(object):
 '''
 File Config Class. Stores zerosocket configuration in /etc/zsocket/conf file.
 '''
-class FileConfig(Config.Config):
+class FileConfig(Config):
     '''
     classdocs
     '''
@@ -100,13 +101,16 @@ class FileConfig(Config.Config):
         Constructor
         '''
         super(FileConfig,self).__init__()
+        self.__dirty = False
+
         if filepath is None:
             #self._filepath = 'sock.conf'#'/etc/zeroconfig/sock.conf'
             self._filepath = '/etc/zsocket/conf'
         else:
             self._filepath = filepath
             self.read()
-        self.__dirty = False
+
+        self._conf_dir = os.path.dirname(self._filepath)
     
     def __del__(self):
         '''
@@ -138,6 +142,12 @@ class FileConfig(Config.Config):
         '''
         @summary: write configuration to file
         '''
+        # Create the parent dir if necessary
+        try:
+            os.makedirs(self._conf_dir)
+        except:
+            pass
+
         try:
             with open(self._filepath, 'w') as _file:
                 _file.write(str(self))
