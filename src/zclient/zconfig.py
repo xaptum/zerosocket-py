@@ -10,6 +10,9 @@ import socket
 import os
 from zexceptions import (ZSError,ZSException)
 
+CONF_DIR = '/etc/zsocket/'
+CONF_FILE = CONF_DIR + 'conf'
+
 '''
 Config class. A dictionary of zerosocket configuration options.
 '''
@@ -89,12 +92,15 @@ class Config(object):
 
 
 '''
-File Config Class. Stores zerosocket configuration in /etc/zsocket/conf file.
+File Config Class. Stores zerosocket configuration in /etc/zclient/conf file.
 '''
 class FileConfig(Config):
     '''
     classdocs
     '''
+
+    def delete_config_file(cls):
+        os.remove(CONF_FILE)
 
     def __init__(self, filepath = None):
         '''
@@ -105,7 +111,7 @@ class FileConfig(Config):
 
         if filepath is None:
             #self._filepath = 'sock.conf'#'/etc/zeroconfig/sock.conf'
-            self._filepath = '/etc/zsocket/conf'
+            self._filepath = CONF_FILE
         else:
             self._filepath = filepath
             self.read()

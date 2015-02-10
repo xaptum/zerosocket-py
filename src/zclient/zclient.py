@@ -8,10 +8,10 @@ Created on Jul 27, 2014
 
 from zexceptions import ZSException, ZSError
 from zsocket import zsocket
-from config import FileConfig
+from zconfig import FileConfig
 from zhttpserver import ZHttpServer
 from Queue import Queue, Empty
-import threading, select
+import select
 
 import sys, traceback
 import time
@@ -20,28 +20,24 @@ _MAX_QUEUE_SIZE = 1000
 _DELIM = b'.\r\n'
 
 class ZClient(object):
-    class app_thread(threading.Thread):
-        def __init__(self, zclient, app_instance):
-            self.__app = app_instance
+    class zclient_thread(threading.Thread):
+        def __init__(self, zclient):
             self.__zclient = zclient
             threading.Thread.__init__(self)
 
         def run(self):
-            self.__app.loop(self.__zclient)
+            self.__zclient.loop()
 
-    def __init__(self, app_instance = None):
-        if app_instance is None:
-            raise ZSException("Invalid parameters. ZClient requires an instance that implements the loop(obj)")
-
-        self.__app = app_instance
+    def __init__(self):
         self.__read_queue = Queue(_MAX_QUEUE_SIZE)
         self.__write_queue = Queue(_MAX_QUEUE_SIZE)
         self.__wireless_config = None
         self.__zsock = None
         self.__done = False
 
-    def reset(self):
-        print "Deleteing FileConfig() file Make this a static method"
+    @classmethod
+    def reset_config(cls):
+        FileConfig.delete_config_file()
 
     def is_running(self):
         return not self.__done
@@ -64,11 +60,12 @@ class ZClient(object):
         self.__zsock.close()
         print "Shutting down zclient"
 
-    def loop(self):
-        try:
-            self.__loop()
-        except KeyboardInterrupt:
-            self.shutdown()
+    def start(self):
+        self.__loop()
+
+    def start_daemon(self):
+        th = zclient_thread(self)
+        th.start()
 
     def __msg(self):
         msg = None
@@ -100,10 +97,6 @@ class ZClient(object):
         self.__zsock = zsocket()
         self.__zsock.connect()
 
-        # Call App instance's loop method in its own thread
-        t = self.app_thread(self, self.__app)
-        t.start()
-
         # Cereate poll
         p = select.poll()
         p.register(self.__zsock.fileno())
@@ -122,9 +115,3 @@ class ZClient(object):
                 if event & select.POLLIN == select.POLLIN:
                     msg = self.zsock.recv()
                     self.__read_queue.put_nowait(msg)
-            
-
-        
-
-        
-        

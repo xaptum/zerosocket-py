@@ -11,9 +11,11 @@ import ssl
 import re
 import json
 from zexceptions import (ZSError, ZSException)
-from config import FileConfig
+from zconfig import FileConfig
 
 
+_CERT_FILE = zconfig.CONF_DIR + '/.cacert.pem'
+ 
 class zsocket(object):
     '''
     members:
@@ -54,7 +56,7 @@ class zsocket(object):
         '''
         if transport is 'SSL':
             rawsock = socket.socket(family,type_,proto)
-            self.__sock = ssl.wrap_socket(rawsock,ca_certs="./.cacert.pem", cert_reqs=ssl.CERT_REQUIRED)
+            self.__sock = ssl.wrap_socket(rawsock,ca_certs=_CERT_FILE, cert_reqs=ssl.CERT_REQUIRED)
         else:
             self.__sock = socket.socket(family,type_,proto)
         return self

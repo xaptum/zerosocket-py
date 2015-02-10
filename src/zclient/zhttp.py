@@ -10,10 +10,11 @@ from BaseHTTPServer import BaseHTTPRequestHandler,HTTPServer
 from os import curdir, sep
 import cgi
 from zexceptions import ZSException, ZSError
-from config import FileConfig
+from zconfig import FileConfig
 import sys, traceback
 
-PORT = 13301
+_PORT = 13301
+_SERVER_ROOT = zconfig.CONF_DIR
 
 '''
 Handle HTTP Requests
@@ -59,7 +60,7 @@ class ZHttpHandler(BaseHTTPRequestHandler):
 
             if sendReply == True:
                 #Open the static file requested and send it
-                f = open(curdir + sep + self.path) 
+                f = open(_SERVER_ROOT + sep + self.path) 
                 self.send_response(200)
                 self.send_header('Content-type',mimetype)
                 self.end_headers()
@@ -125,9 +126,9 @@ class ZHttpServer(HTTPServer):
         self.__wireless_config = None
 
         if issubclass(HTTPServer, object):
-            self.__server = super(ZHttpServer, self).__init__(('', PORT), ZHttpHandler)
+            self.__server = super(ZHttpServer, self).__init__(('', _PORT), ZHttpHandler)
         else:
-            self.__server = HTTPServer.__init__(self, ('', PORT), ZHttpHandler)
+            self.__server = HTTPServer.__init__(self, ('', _PORT), ZHttpHandler)
         
     def set_wireless_config(self, config):
         self.__wireless_config = config
@@ -145,13 +146,3 @@ class ZHttpServer(HTTPServer):
     def start_server(self):
         while not self.__done:
             self.handle_request()
-
-if __name__ == "__main__":
-    try:
-        #server = ZHttpServer(('', PORT), ZHttpHandler)
-        #server.serve_forever()
-        server = ZHttpServer()
-        server.start_server()
-        
-    except KeyboardInterrupt:
-        server.stop_server()
