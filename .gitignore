@@ -3,6 +3,8 @@ __pycache__/
 *.py[cod]
 
 # 
+src/zclient/index.html
+src/zclient/logo.png
 src/zsocket/index.html
 src/zsocket/logo.png
 
