@@ -12,9 +12,10 @@ import re
 import json
 from zexceptions import (ZSError, ZSException)
 from zconfig import FileConfig
+from zconfig import CONF_DIR
 
 
-_CERT_FILE = zconfig.CONF_DIR + '/.cacert.pem'
+_CERT_FILE = CONF_DIR + '/.cacert.pem'
  
 class zsocket(object):
     '''

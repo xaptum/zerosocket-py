@@ -10,7 +10,7 @@ import socket
 import os
 from zexceptions import (ZSError,ZSException)
 
-CONF_DIR = '/etc/zsocket/'
+CONF_DIR = '/etc/zclient/'
 CONF_FILE = CONF_DIR + 'conf'
 
 '''

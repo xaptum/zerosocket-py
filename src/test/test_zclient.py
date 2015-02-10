@@ -1,4 +1,4 @@
-from zclient import ZClient
+from zclient.zclient import ZClient
 import time
 import sys
 import threading

@@ -9,9 +9,9 @@ Created on Jul 27, 2014
 from zexceptions import ZSException, ZSError
 from zsocket import zsocket
 from zconfig import FileConfig
-from zhttpserver import ZHttpServer
+from zhttp import ZHttpServer
 from Queue import Queue, Empty
-import select
+import threading, select
 
 import sys, traceback
 import time
@@ -26,7 +26,7 @@ class ZClient(object):
             threading.Thread.__init__(self)
 
         def run(self):
-            self.__zclient.loop()
+            self.__zclient.start()
 
     def __init__(self):
         self.__read_queue = Queue(_MAX_QUEUE_SIZE)
@@ -64,7 +64,7 @@ class ZClient(object):
         self.__loop()
 
     def start_daemon(self):
-        th = zclient_thread(self)
+        th = ZClient.zclient_thread(self)
         th.start()
 
     def __msg(self):

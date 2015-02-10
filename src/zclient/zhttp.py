@@ -11,10 +11,11 @@ from os import curdir, sep
 import cgi
 from zexceptions import ZSException, ZSError
 from zconfig import FileConfig
+from zconfig import CONF_DIR
 import sys, traceback
 
-_PORT = 13301
-_SERVER_ROOT = zconfig.CONF_DIR
+_PORT = 13300
+_SERVER_ROOT = CONF_DIR
 
 '''
 Handle HTTP Requests
