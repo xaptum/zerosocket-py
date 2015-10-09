@@ -16,7 +16,7 @@ import threading, select
 import sys, traceback
 import time
 
-_MAX_QUEUE_SIZE = 1000
+_MAX_QUEUE_SIZE = 10000
 _DELIM = b'.\r\n'
 
 class ZClient(object):
@@ -34,10 +34,14 @@ class ZClient(object):
         self.__wireless_config = None
         self.__zsock = None
         self.__done = False
+        self.__connected = False
 
     @classmethod
     def reset_config(cls):
         FileConfig.delete_config_file()
+
+    def is_connected(self):
+        return self.__connected
 
     def is_running(self):
         return not self.__done
@@ -46,7 +50,7 @@ class ZClient(object):
         return self.__wireless_config
 
     def write(self, item):
-        msg = item + _DELIM
+        msg = item
         self.__write_queue.put_nowait(msg)
 
     def read(self):
@@ -96,6 +100,7 @@ class ZClient(object):
         # Create zero socket and connect
         self.__zsock = zsocket()
         self.__zsock.connect()
+        self.__connected = True
 
         # Cereate poll
         p = select.poll()
@@ -113,5 +118,5 @@ class ZClient(object):
             events = p.poll()
             for (fd,event) in events:
                 if event & select.POLLIN == select.POLLIN:
-                    msg = self.zsock.recv()
+                    msg = self.__zsock.recv(4096)
                     self.__read_queue.put_nowait(msg)

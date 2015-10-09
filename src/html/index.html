@@ -1,151 +1,247 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Xaptum Configuration</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Waitbot Configuration</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="bootstrap.min.css">
     <style type="text/css">
-    </style>
-  </head>
-  <body>
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-      <tr>
-	<td>
-	  <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse;">
-	    <tr>
-	      <td bgcolor="#182933" align="center" style="padding: 20px 0 20px 0;">
-		<img src="logo.png" alt="Xaptum Configuration" style="display: block;" />
-	      </td>
-	    </tr> <!-- container logo row  -->
-	    <tr>
-	      <td bgcolor="#ffffff"  style="padding: 40px 30px 40px 30px;">
-		<form action="update" method="post" id="xaptum-config-form">
-		  <table border="0" cellpadding="0" cellspacing="0" width="100%">
-		    <tr>
-		      <td style="padding: 10px 0 10px 0;">
-			Xaptum Broker Configuration			
-			<table border="0" cellpadding="0" cellspacing="0" width="75%" style="padding: 10px 0 0 0;">
-			  <tr>
-			    <td width="160" valign="top" align="right" style="padding: 2px 0 2px 0;">
-			      Host
-			    </td>
-			    <td style="font-size: 0; line-height: 0;" width="10">
-			      &nbsp;
-			    </td>
-			    <td width="260" valign="top">
-			      <input type="text" name="xaptum-broker-host" placeholder="Xaptum Broker Host" value="broker.xaptum.com"/>
-			    </td>
-			  </tr>
+	html{
+		margin:0;
+		padding:0;
+		height:100%;
+	}
+	body{
+		background-image: url("cubes.png");
+		background-repeat: repeat;
+		margin:0;
+		padding:0;
+		height:100%;
+	}
+	#nav-holder ul {
+		margin: 0px auto;
+		max-width: 600px;
+	    list-style-type: none;
+	    padding: 0;
+	    text-align:center;
+	}
+	#nav-holder li {
+	    display: inline;
+	    margin-top: 20px;
+	}
+	#nav-holder a {
+	    padding: 10px;
+	    cursor: pointer;
+	    font-size: 16px;
+	    color: #333;
+	    display: inline-block;
+		border-top: 2px solid #DCE4EC;
+		border-right: 2px solid #DCE4EC;
+		border-left: 2px solid #DCE4EC;
+		border-top-left-radius: 10px;
+		border-top-right-radius: 10px;
+	}
+	#form-holder{
+		border: 2px solid #DCE4EC;
+		border-radius: 10px;
+		max-width: 600px;
+		margin: 0px auto 20px auto;
+		background-color:#fdfdfd;
+		padding: 10px;
+	}
+	#form-holder h3{
+		text-align: center;
+		margin: 20px 0px;
+	}
+	#logo{
+		display: inline-block;
+		margin: 10px auto 30px auto;
+	}
+	#xaptum-logo{
+		display: inline-block;
+	}
+	#wifi-configuration-holder, #admin-configuration-holder{
+		display: none;
+	}
+	.selected-menu{
+		background: #e8eef5;
+	}
+	#powered-by-text{
+		text-align: center;
+	}
+	#wrapper{
+		min-height:100%;
+		position:relative;
+	}
 
-			  <tr>
-			    <td width="160" valign="top" align="right" style="padding: 2px 0 2px 0;">
-			      Port
-			    </td>
-			    <td style="font-size: 0; line-height: 0;" width="10">
-			      &nbsp;
-			    </td>
-			    <td width="260" valign="top">
-			      <input type="text" name="xaptum-broker-port" placeholder="Xaptum Broker Port" value="3300"/>
-			    </td>
-			  </tr>
-			</table> <!-- Broker fields table -->
-		      </td>
-		    </tr> <!-- xaptum broker config -->
-		    <tr>
-		      <td style="padding: 10px 0 10px 0;">
-			Xaptum Network Configuration
-			<table border="0" cellpadding="0" cellspacing="0" width="75%" style="padding: 10px 0 0 0;">
-			  <tr>
-			    <td width="160" valign="top" align="right" style="padding: 2px 0 2px 0;">
-			      Connection Guid
-			    </td>
-			    <td style="font-size: 0; line-height: 0;" width="10">
-			      &nbsp;
-			    </td>
-			    <td width="260" valign="top">
-			      <input type="text" name="xaptum-connection-guid" placeholder="Connection GUID" value=""/>
-			    </td>
-			  </tr>
+	#main-content-holder{
+		padding-bottom:170px;
+	}
+	#powered-by-xaptum{
+		width:100%;
+		height:140px;
+		position:absolute;
+		bottom:0;
+		left:0;
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	#xaptum-address{
+		max-width: 250px;
+		margin: 0 auto;
+	}
+	#alert-div {
+          margin: 0px auto;
+	  max-width: 600px;
+	  text-align: center;
+	  padding-bottom: 10px;
+	}
 
-			  <tr>
-			    <td width="160" valign="top" align="right" style="padding: 2px 0 2px 0;">
-			      Network Username
-			    </td>
-			    <td style="font-size: 0; line-height: 0;" width="10">
-			      &nbsp;
-			    </td>
-			    <td width="260" valign="top">
-			      <input type="text" name="xaptum-network-username" placeholder="Network User Name" value=""/>
-			    </td>
-			  </tr>
+	@media screen and (max-width:620px) {
+		#form-holder{
+			margin: 10px;
+		}
+		#nav-holder a {
+		    display: block;
+			border-radius: 0px;
+			margin: 0px 10px 0px 10px;
+		}
+		#admin-btn{
+			border-bottom: 2px solid #DCE4EC;
+		}
+	}
+	</style>
+    <script src="jquery-1.11.0.min.js"></script>
+    <script>
+	$(document).ready(function() {
+		$("#ethernet-btn").click(function(){
+			$("#wifi-configuration-holder, #admin-configuration-holder").hide();
+			$("#ethernet-configuration-holder").show();
+			$("#nav-holder a").removeClass('selected-menu');
+			$(this).addClass('selected-menu');
+		});
+		$("#wifi-btn").click(function(){
+			$("#ethernet-configuration-holder, #admin-configuration-holder").hide();
+			$("#wifi-configuration-holder").show();
+			$("#nav-holder a").removeClass('selected-menu');
+			$(this).addClass('selected-menu');
+		});
+		$(".admin-btn").click(function(){
+			$("#wifi-configuration-holder, #ethernet-configuration-holder").hide();
+			$("#admin-configuration-holder").show();
+			$("#nav-holder a").removeClass('selected-menu');
+			$("#admin-menu-btn").addClass('selected-menu');
+		});
 
-<tr>
-			    <td width="160" valign="top" align="right" style="padding: 2px 0 2px 0;">
-			      Network Password
-			    </td>
-			    <td style="font-size: 0; line-height: 0;" width="10">
-			      &nbsp;
-			    </td>
-			    <td width="260" valign="top">
-			      <input type="password" name="xaptum-network-password" placeholder="Network Password" value=""/>
-			    </td>
-			  </tr>
-			</table> <!-- Broker fields table -->
-		      </td>
-		    </tr> <!-- xaptum network config -->
-		    <tr>
-		      <td style="padding: 10px 0 10px 0;">
-			Wireless Router Settings
-			<table border="0" cellpadding="0" cellspacing="0" width="75%" style="padding: 10px 0 0 0;">
-			  <tr>
-			    <td width="160" valign="top" align="right" style="padding: 2px 0 2px 0;">
-			      SSID
-			    </td>
-			    <td style="font-size: 0; line-height: 0;" width="10">
-			      &nbsp;
-			    </td>
-			    <td width="260" valign="top">
-			      <input type="text" name="wireless-ssid" placeholder="Wireless SSID" value=""/>
-			    </td>
-			  </tr>
+                $(".close").click( function() {
+                  $("#alert-div").addClass("hide");
+                });
 
-			  <tr>
-			    <td width="160" valign="top" align="right" style="padding: 2px 0 2px 0;">
-			      Key/Password
-			    </td>
-			    <td style="font-size: 0; line-height: 0;" width="10">
-			      &nbsp;
-			    </td>
-			    <td width="260" valign="top">
-			      <input type="password" name="wireless-key" placeholder="Key/Password" value=""/>
-			    </td>
-			  </tr>
-			</table> <!-- Broker fields table -->
-		      </td>
-		    </tr> <!-- Wireless router settings -->
-		    <tr>
-		      <td align="center" style="padding: 20px 0 0 0;">
-			<button type="submit" form="xaptum-config-form" value="Submit">Submit</button>
-		      </td>
-		    </tr>
-		  </table> <!-- Content Table in a container row -->
-		</form> <!-- Content form -->
-	      </td>
-	    </tr> <!-- container row -->
-	    <tr>
-	      <td bgcolor="#ebebeb"  style="padding: 20px 10px 20px 10px;">
-		<em>Copyright &copy; 2014-2015 Xaptum, Inc., All rights reserved.</em><br/>
-		<br/>
-		<strong>Our mailing address is:</strong><br/>
-		Xaptum, Inc.<br/>
-		222 W. Merchandise Mart, 12th Floor<br/>
-		Chicago, Illinois- 60654<br/>
-		&nbsp;
-	      </td>
-	    </tr> <!-- container footer row -->
-	  </table> <!-- 600px container table -->
-	</td>
-      </tr>
-    </table> <!-- main table -->
-  </body>
+	        $("#xaptum-config-form").submit( function() {
+	          $.ajax({
+                    type: "POST",
+                    url: "/update",
+                    data: $("#xaptum-config-form").serialize(), // serializes the form's elements.
+                    success: function(data) {
+	              $("#alert-text").html("Xaptum Configuration Updated!. Please close the browser window now!");
+	              $("button").addClass("hide");
+	              $("#alert-div").removeClass().addClass("alert alert-success");
+                    },
+                    error: function() {
+                      $("#alert-text").html("Unable to update Xaptum Configuration!");
+	              $("#alert-div").removeClass().addClass("alert alert-danger");
+                    }
+                  });
+
+	          return false;
+	        });
+	});
+	</script>
+</head>
+<body>
+  <div id="wrapper">
+    <div id="header">
+      <img id="logo" src="waitbot_logo.png" alt="Xaptum Configuration" style="display: block;" />
+      
+      <div id="alert-div" class="hide" role="alert">
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	<strong id="alert-text">Warning!</strong>
+      </div>
+      <div id="nav-holder">
+	<ul>
+	  <li><a id='ethernet-btn' class="selected-menu">Connect via Ethernet</a></li>
+	  <li><a id='wifi-btn'>Connect via Wi-Fi</a></li>
+	  <li><a id="admin-menu-btn" class='admin-btn'>Admin Setting</a></li>
+	</ul>
+      </div>
+    </div>
+
+    <div id="main-content-holder">
+      <div id="form-holder">
+	<form id="xaptum-config-form" class="form-horizontal" action="update" method="post">
+	  <div id="admin-configuration-holder">
+	    <h3>Enter Xaptum Relay Network configuration</h3>
+	    <div class="form-group">
+	      <label for="xaptum-connection-guid" class="col-sm-2 control-label">GUID</label>
+	      <div class="col-sm-10">
+		<input type="text" name="xaptum-connection-guid" class="form-control" placeholder="Device GUID"/>
+	      </div>
+	    </div>
+	    <div class="form-group">
+	      <label for="xaptum-network-username" class="col-sm-2 control-label">Network Username</label>
+	      <div class="col-sm-10">
+		<input type="text" name="xaptum-network-username" class="form-control" placeholder="Network User Name"/>
+	      </div>
+	    </div>
+	    <div class="form-group">
+	      <label for="xaptum-network-password" class="col-sm-2 control-label">Network Password</label>
+	      <div class="col-sm-10">
+		<input type="password" name="xaptum-network-password" class="form-control" placeholder="Network Password"/>
+	      </div>
+	    </div>
+	    <div class="form-group">
+	      <div class="col-sm-10 text-center">
+		<button type="submit" class="btn btn-primary">Submit</button>
+	      </div>
+	    </div>
+	  </div>
+	  <div id="wifi-configuration-holder">
+	    <h3>Please enter your Wi-Fi network information</h3>
+	    <div class="form-group">
+	      <label for="wireless-ssid" class="col-sm-2 control-label">Name</label>
+	      <div class="col-sm-10">
+		<input type="text" name="wireless-ssid" class="form-control" placeholder="e.g. 1871-memeber" value=""/>
+	      </div>
+	    </div>
+	    <div class="form-group">
+	      <label for="wireless-key" class="col-sm-2 control-label">Password</label>
+	      <div class="col-sm-10">
+		<input type="password" name="wireless-key" class="form-control" value=""/>
+	      </div>
+	    </div>
+	    <div class="form-group">
+	      <div class="col-sm-10 text-center">
+		Go to <a href="#" class="admin-btn btn btn-primary">Admin Settings</a>
+	      </div>
+	    </div>
+	  </div>
+	  <div id="ethernet-configuration-holder">
+	    <h3>No additional configuration required</h3>
+	    <div class="form-group text-center">
+	      Go to <a href="#" class="admin-btn btn btn-primary">Admin Settings</a>
+	    </div>
+	  </div>
+	</form>
+      </div>
+    </div>
+    <div id="powered-by-xaptum">
+      <p id="powered-by-text">Waitbot is powered by: <b>Xaptum, Inc.</b> &copy; 2015 </p>
+	<!--img id="xaptum-logo"src="logo.png" alt="Xaptum Configuration"></p>
+      <p id="xaptum-address">
+	<b>Xaptum, Inc.</b><br>
+	222 W. Merchandise Mart, 12th Floor<br>
+	Chicago, Illinois- 60654<br></p-->
+    </div>
+  </div>
+</body>
 </html>

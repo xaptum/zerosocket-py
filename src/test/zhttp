@@ -1,0 +1,25 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides: zhttp
+# Required-Start: $local_fs $remote_fs $network $syslog
+# Required-Stop: $local_fs $remote_fs $network $syslog
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: Management of zhttp Service
+### END INIT INFO#
+
+# Carry out specific functions when asked to by the system
+case "$1" in
+  start)
+    python /home/beaconbot/xaptum/zhttp.py 2&1 > /dev/null &
+    ;;
+  stop)
+    PID=`pgrep -f "zhttp"`; kill -9 $PID
+    ;;
+  *)
+    echo "Usage: /etc/init.d/blah {start|stop}"
+    exit 1
+    ;;
+esac
+
+exit 0

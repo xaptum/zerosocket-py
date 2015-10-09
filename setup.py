@@ -1,8 +1,13 @@
 #!/usr/bin/env python
-
+import os
 from distutils.core import setup
 
-
+def get_data_files():
+    dirs = ['src/html/', 'src/data/']
+    files = []
+    for d in dirs:
+        files.extend( [(d+f) for f in os.listdir(d) if os.path.isfile(d+f)] )
+    return files
 
 setup(name='zclient',
       version='2.0',
@@ -13,6 +18,6 @@ setup(name='zclient',
       package_dir = {'': 'src'},
       packages=['zclient'],
       data_files = [
-          ('/etc/zclient/', ['src/html/index.html', 'src/html/logo.png', 'src/data/.cacert.pem', 'src/data/conf'])
+          ('/etc/zclient/', get_data_files())
       ]
      )

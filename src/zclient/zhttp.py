@@ -7,7 +7,7 @@ Created on Jul 27, 2014
 '''
 
 from BaseHTTPServer import BaseHTTPRequestHandler,HTTPServer
-from os import curdir, sep
+from os import curdir, sep, popen
 import cgi
 from zexceptions import ZSException, ZSError
 from zconfig import FileConfig
@@ -83,8 +83,8 @@ class ZHttpHandler(BaseHTTPRequestHandler):
                              'CONTENT_TYPE':self.headers['Content-Type'],
                     })
 
-                host = self.__request_param(form, "xaptum-broker-host")
-                port = self.__request_param(form, "xaptum-broker-port")
+                host = "broker.xaptum.com" #self.__request_param(form, "xaptum-broker-host")
+                port = "3300" #self.__request_param(form, "xaptum-broker-port")
                 usr = self.__request_param(form, "xaptum-network-username")
                 pwd = self.__request_param(form, "xaptum-network-password")
                 guid = self.__request_param(form, "xaptum-connection-guid")
@@ -101,11 +101,20 @@ class ZHttpHandler(BaseHTTPRequestHandler):
                 fc.write()
                 fc.close()
 
+                # Hack to update wireless config
+                try:
+                    s1 = "wpa-ssid"
+                    s2 = "wpa-psk"
+                    cmd_fmt = "sudo find /etc/network -type f -name interfaces -exec sed -i 's/%s.*/%s \"%s\"/g' {} +" 
+                    cmd = cmd_fmt % (s1, s1, ssid)
+                    popen( cmd )
+                    cmd = cmd_fmt % (s2, s2, wkey)
+                    popen( cmd )
+                except:
+                    pass
+
                 # Update wireless config
-                wc = {}
-                wc['SSID'] = ssid
-                wc['KEY'] = wkey
-                self.server.set_wireless_config( wc )
+                self.server.set_wireless_config( ssid, wkey )
 
                 self.send_response(200)
                 self.end_headers()
@@ -124,15 +133,16 @@ class ZHttpServer(HTTPServer):
     def __init__(self):
         self.__server = None
         self.__done = False
-        self.__wireless_config = None
+        self.__wireless_config = {}
 
         if issubclass(HTTPServer, object):
             self.__server = super(ZHttpServer, self).__init__(('', _PORT), ZHttpHandler)
         else:
             self.__server = HTTPServer.__init__(self, ('', _PORT), ZHttpHandler)
         
-    def set_wireless_config(self, config):
-        self.__wireless_config = config
+    def set_wireless_config(self, ssid, key):
+        self.__wireless_config['SSID'] = ssid
+        self.__wireless_config['KEY'] = key
 
     def get_wireless_config(self):
         return self.__wireless_config

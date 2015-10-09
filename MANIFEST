@@ -2,8 +2,12 @@
 setup.py
 src/data/.cacert.pem
 src/data/conf
+src/html/bootstrap.min.css
+src/html/cubes.png
 src/html/index.html
+src/html/jquery-1.11.0.min.js
 src/html/logo.png
+src/html/waitbot_logo.png
 src/zclient/__init__.py
 src/zclient/zclient.py
 src/zclient/zconfig.py
